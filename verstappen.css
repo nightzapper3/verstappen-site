@@ -1,0 +1,709 @@
+/* ============================================================
+   MONVMENTVM MAXIMI — Verstappen tribute
+   Obsidian & champagne · museum-at-night · neo-classical
+   ============================================================ */
+
+:root {
+  --bg:        oklch(0.135 0.006 75);
+  --bg2:       oklch(0.168 0.009 78);
+  --bg3:       oklch(0.205 0.011 80);
+  --ivory:     oklch(0.93 0.012 90);
+  --gold:      #c9a96a;
+  --blood:     oklch(0.47 0.14 27);
+
+  --ivory-70:  color-mix(in srgb, var(--ivory) 70%, transparent);
+  --ivory-45:  color-mix(in srgb, var(--ivory) 45%, transparent);
+  --gold-80:   color-mix(in srgb, var(--gold) 80%, var(--ivory));
+  --gold-dim:  color-mix(in srgb, var(--gold) 55%, transparent);
+  --line:      color-mix(in srgb, var(--gold) 22%, transparent);
+  --line-soft: color-mix(in srgb, var(--gold) 12%, transparent);
+
+  --f-display: 'Cinzel', serif;
+  --f-serif:   'Cormorant Garamond', serif;
+  --f-mono:    'Spline Sans Mono', monospace;
+
+  --motion: 1; /* scaled by Tweaks */
+  --pad: clamp(24px, 5vw, 96px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body {
+  background: var(--bg);
+  color: var(--ivory);
+  font-family: var(--f-serif);
+  font-size: 19px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--gold); color: var(--bg); }
+
+html.smooth body { overscroll-behavior: none; }
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ---- wave letters (entrance cascade + hover ripple) ----------- */
+.ww { display: inline-block; white-space: nowrap; }
+.wl { display: inline-block; }
+[data-wave] .wl { transition: transform .38s cubic-bezier(.22,1,.36,1), color .38s ease; transition-delay: 0s; }
+[data-wave]:hover .wl { transform: translateY(-0.07em); color: var(--gold-80); transition-delay: var(--wd, 0s); }
+@media (prefers-reduced-motion: no-preference) {
+  [data-split] .wl {
+    opacity: 0; transform: translateY(0.5em); filter: blur(7px);
+    transition: opacity .95s cubic-bezier(.22,1,.36,1) var(--d, 0s),
+                transform .95s cubic-bezier(.22,1,.36,1) var(--d, 0s),
+                filter .95s cubic-bezier(.22,1,.36,1) var(--d, 0s);
+  }
+  [data-split].in .wl { opacity: 1; transform: none; filter: none; }
+}
+.wave-on .wl { opacity: 1; filter: none; transition: transform .38s cubic-bezier(.22,1,.36,1); transition-delay: 0s; }
+.wave-on:hover .wl { transform: translateY(-0.06em); transition-delay: var(--wd, 0s); }
+
+/* Gradient-clipped titles: clip per-letter (a transformed/filtered child
+   escapes its parent's background-clip:text and would vanish on hover). */
+#hero .h1-big .wl {
+  background: linear-gradient(180deg, var(--ivory) 55%, color-mix(in srgb, var(--gold) 55%, var(--ivory)) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent !important;
+}
+#motto .motto-latin .wl {
+  background: linear-gradient(180deg, var(--ivory), color-mix(in srgb, var(--gold) 70%, var(--ivory)));
+  -webkit-background-clip: text; background-clip: text; color: transparent !important;
+}
+#hero .h1-big.wave-on .wl,
+#motto .motto-latin[data-wave] .wl {
+  transition: transform .38s cubic-bezier(.22,1,.36,1), filter .38s ease;
+}
+#hero .h1-big.wave-on:hover .wl,
+#motto .motto-latin[data-wave]:hover .wl {
+  filter: brightness(1.35);
+  transition-delay: var(--wd, 0s);
+}
+
+/* ---- quiet hover reactions ------------------------------------ */
+.crown-body p, .house p, .gp-note, .cell .sublbl, .exhibit .plate b { transition: color .5s ease; }
+.crown-row:hover .crown-body p, .house:hover p, .gp-note:hover { color: var(--ivory); }
+.cell:hover .sublbl { color: var(--ivory-70); }
+.exhibit:hover .plate b { color: var(--gold); }
+.cell .big { transition: transform .45s cubic-bezier(.22,1,.36,1); }
+.cell:hover .big { transform: translateY(-4px); }
+
+/* ---- finalized slots: viewing mode, no drop/replace/remove ----- */
+image-slot { pointer-events: none; }
+image-slot:not([data-filled]):not([src]) { visibility: hidden; }
+
+/* ---- texture & vignette ------------------------------------ */
+#grain {
+  position: fixed; inset: -100px; z-index: 200; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  opacity: 0.07; mix-blend-mode: overlay;
+  animation: grainShift 0.9s steps(3) infinite;
+}
+body.no-grain #grain { display: none; }
+@keyframes grainShift {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(-40px, 25px); }
+  66% { transform: translate(30px, -35px); }
+  100% { transform: translate(0, 0); }
+}
+#vignette {
+  position: fixed; inset: 0; z-index: 199; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 40%, transparent 55%, rgb(0 0 0 / 0.42) 100%);
+}
+
+/* ---- column flutes (fixed page edges) ----------------------- */
+.flutes {
+  position: fixed; top: 0; bottom: 0; width: 14px; z-index: 90; pointer-events: none;
+  background: repeating-linear-gradient(90deg,
+    transparent 0 5px, var(--line-soft) 5px 6px, transparent 6px 14px);
+  opacity: 0.9;
+}
+.flutes.left { left: clamp(8px, 1.4vw, 26px); }
+.flutes.right { right: clamp(8px, 1.4vw, 26px); }
+@media (max-width: 760px) { .flutes { display: none; } }
+
+/* ---- cursor -------------------------------------------------- */
+#cursor {
+  position: fixed; z-index: 400; left: 0; top: 0; pointer-events: none;
+  width: 34px; height: 34px; margin: -17px 0 0 -17px;
+  border: 1px solid var(--gold-dim); border-radius: 50%;
+  display: grid; place-items: center;
+  transition: width .28s cubic-bezier(.22,1,.36,1), height .28s cubic-bezier(.22,1,.36,1),
+              margin .28s cubic-bezier(.22,1,.36,1), border-color .28s, background-color .28s;
+}
+#cursor .dot {
+  width: 4px; height: 4px; border-radius: 50%; background: var(--gold);
+  transition: opacity .2s;
+}
+#cursor .cursor-tag {
+  position: absolute; white-space: nowrap;
+  font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.3em;
+  color: var(--bg); opacity: 0; transition: opacity .2s;
+}
+#cursor.big {
+  width: 76px; height: 76px; margin: -38px 0 0 -38px;
+  background: var(--gold); border-color: var(--gold);
+}
+#cursor.big .dot { opacity: 0; }
+#cursor.big .cursor-tag { opacity: 1; }
+@media (pointer: coarse) { #cursor { display: none; } }
+html.fine-cursor, html.fine-cursor a, html.fine-cursor button { cursor: none; }
+
+/* ---- preloader ----------------------------------------------- */
+#preloader {
+  position: fixed; inset: 0; z-index: 500; background: var(--bg);
+  display: grid; place-items: center;
+  transition: clip-path 1.1s cubic-bezier(.76,0,.24,1);
+  clip-path: inset(0 0 0 0);
+}
+#preloader.away { clip-path: inset(0 0 100% 0); }
+#preloader .pre-inner { display: grid; justify-items: center; gap: 38px; }
+#preloader .pre-mono {
+  font-family: var(--f-display); font-weight: 700; letter-spacing: 0.34em;
+  font-size: 15px; color: var(--gold); text-indent: 0.34em; white-space: nowrap;
+}
+#preloader .lights { display: flex; gap: clamp(14px, 3vw, 26px); }
+#preloader .lamp {
+  width: clamp(26px, 4.6vw, 42px); height: clamp(26px, 4.6vw, 42px);
+  border-radius: 50%; border: 1px solid var(--line);
+  background: var(--bg2);
+  transition: background .12s, box-shadow .12s, border-color .12s;
+}
+#preloader .lamp.on {
+  background: var(--blood); border-color: var(--blood);
+  box-shadow: 0 0 24px 4px color-mix(in srgb, var(--blood) 55%, transparent);
+}
+#preloader .lamp.out { background: var(--bg2); box-shadow: none; border-color: var(--line-soft); }
+#preloader .pre-cap {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.42em;
+  color: var(--ivory-45); text-indent: 0.42em; min-height: 14px;
+}
+
+/* ---- top bar -------------------------------------------------- */
+#topbar {
+  position: fixed; z-index: 300; top: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px var(--pad);
+  mix-blend-mode: normal;
+  opacity: 0; transform: translateY(-12px);
+  transition: opacity .9s ease .2s, transform .9s ease .2s;
+}
+body.loaded #topbar { opacity: 1; transform: none; }
+#topbar .wordmark {
+  font-family: var(--f-display); font-weight: 700; font-size: 15px;
+  letter-spacing: 0.3em; color: var(--ivory);
+}
+#topbar .wordmark em { font-style: normal; color: var(--gold); }
+#topbar nav { display: flex; gap: clamp(14px, 2.4vw, 34px); }
+#topbar nav a {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.28em;
+  color: var(--ivory-45); transition: color .3s, letter-spacing .45s cubic-bezier(.22,1,.36,1);
+  padding: 6px 2px;
+}
+#topbar nav a:hover { color: var(--gold); letter-spacing: 0.36em; }
+@media (max-width: 900px) { #topbar nav { display: none; } }
+
+/* ---- museum placard (current chapter) ------------------------ */
+#placard {
+  position: fixed; z-index: 300; left: var(--pad); bottom: 26px;
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 0.3em;
+  color: var(--ivory-45);
+  opacity: 0; transition: opacity .8s ease 1s;
+}
+body.loaded #placard { opacity: 1; }
+#placard::before { content: ""; width: 30px; height: 1px; background: var(--gold-dim); }
+@media (max-width: 760px) { #placard { display: none; } }
+
+/* ---- reveal system ------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .rv {
+    opacity: 0;
+    transform: translateY(calc(46px * var(--motion)));
+    transition: opacity 1.1s cubic-bezier(.22,1,.36,1), transform 1.1s cubic-bezier(.22,1,.36,1);
+    transition-delay: var(--d, 0s);
+  }
+  .rv.in { opacity: 1; transform: none; }
+  .rv-line { overflow: hidden; }
+  .rv-line > span {
+    display: inline-block; transform: translateY(112%);
+    transition: transform 1.25s cubic-bezier(.22,1,.36,1);
+    transition-delay: var(--d, 0s);
+  }
+  .rv-line.in > span { transform: none; }
+  .rv-rule {
+    transform: scaleX(0); transform-origin: left center;
+    transition: transform 1.4s cubic-bezier(.22,1,.36,1) .15s;
+  }
+  .rv-rule.in { transform: scaleX(1); }
+}
+
+/* ---- shared section chrome ------------------------------------ */
+section.cap { position: relative; padding: clamp(90px, 14vh, 170px) var(--pad); }
+.measure { max-width: 1320px; margin: 0 auto; }
+
+.chapter { display: grid; justify-items: center; text-align: center; gap: 20px; margin-bottom: clamp(54px, 9vh, 110px); }
+.chapter .kicker {
+  display: flex; align-items: center; gap: 18px;
+  font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.46em; text-indent: 0.46em;
+  color: var(--gold);
+}
+.chapter .kicker::before, .chapter .kicker::after {
+  content: ""; width: clamp(30px, 6vw, 90px); height: 1px; background: var(--line);
+}
+.chapter h2 {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(42px, 7vw, 96px); letter-spacing: 0.1em; line-height: 1;
+  text-indent: 0.1em;
+}
+.chapter .chapter-sub {
+  font-family: var(--f-serif); font-style: italic; font-size: clamp(17px, 1.6vw, 22px);
+  color: var(--ivory-45); letter-spacing: 0.02em;
+}
+.chapter h2 { text-wrap: balance; }
+.chapter .chapter-sub, #hero .hero-sub2, .gp-plaque .gp-note { text-wrap: balance; }
+.fleuron { color: var(--gold); font-size: 20px; line-height: 1; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero {
+  min-height: 100svh; display: grid; align-content: center; justify-items: center;
+  position: relative; text-align: center; padding: 120px var(--pad) 90px;
+  overflow: hidden;
+}
+#hero .ghost-numeral {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-family: var(--f-display); font-weight: 900;
+  font-size: clamp(340px, 62vw, 900px); line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-soft);
+  pointer-events: none; user-select: none;
+}
+#hero .hero-kicker {
+  font-family: var(--f-mono); font-size: clamp(10px, 1.1vw, 12px);
+  letter-spacing: 0.52em; text-indent: 0.52em; color: var(--gold);
+  margin-bottom: clamp(18px, 3vh, 30px);
+}
+#hero h1 {
+  font-family: var(--f-display); font-weight: 800; line-height: 0.96;
+  display: grid; gap: 4px;
+}
+#hero .h1-small {
+  font-size: clamp(22px, 3.4vw, 46px); letter-spacing: 0.42em; text-indent: 0.42em;
+  font-weight: 600; color: var(--ivory-70);
+}
+#hero .h1-big {
+  font-size: clamp(36px, 8.7vw, 150px); letter-spacing: 0.06em; text-indent: 0.06em;
+  white-space: nowrap;
+  background: linear-gradient(180deg, var(--ivory) 55%, color-mix(in srgb, var(--gold) 55%, var(--ivory)) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+#hero .hero-rule {
+  width: min(560px, 70vw); height: 1px; background: var(--line);
+  margin: clamp(26px, 4vh, 40px) auto;
+  position: relative;
+}
+#hero .hero-rule::after {
+  content: "✦"; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%); color: var(--gold);
+  background: var(--bg); padding: 0 14px; font-size: 12px;
+}
+#hero .hero-sub {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: clamp(13px, 1.7vw, 20px); letter-spacing: 0.34em; text-indent: 0.34em;
+  color: var(--gold-80);
+}
+#hero .hero-sub2 {
+  margin-top: 14px;
+  font-family: var(--f-serif); font-style: italic;
+  font-size: clamp(16px, 1.6vw, 21px); color: var(--ivory-45);
+}
+
+/* rotating seal */
+#seal {
+  position: absolute; right: clamp(16px, 6vw, 110px); bottom: clamp(80px, 12vh, 130px);
+  width: clamp(110px, 13vw, 180px); aspect-ratio: 1;
+  display: grid; place-items: center;
+}
+#seal svg { position: absolute; inset: 0; animation: sealSpin 26s linear infinite; }
+#seal text { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 3px; fill: var(--gold-dim); }
+#seal .seal-core {
+  font-family: var(--f-display); font-weight: 900; font-size: clamp(34px, 4vw, 54px);
+  color: var(--gold);
+}
+@keyframes sealSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { #seal svg { animation: none; } }
+@media (max-width: 760px) { #seal { display: none; } }
+
+#scrollcue {
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  display: grid; justify-items: center; gap: 10px;
+  font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.4em; text-indent: 0.4em;
+  color: var(--ivory-45);
+}
+#scrollcue .stem { width: 1px; height: 44px; background: var(--line); position: relative; overflow: hidden; }
+#scrollcue .stem::after {
+  content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%;
+  background: var(--gold); animation: cueDrop 2.2s cubic-bezier(.76,0,.24,1) infinite;
+}
+@keyframes cueDrop { 0% { top: -50%; } 60%, 100% { top: 110%; } }
+
+/* ---- marquee --------------------------------------------------- */
+.marquee {
+  border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft);
+  overflow: hidden; padding: 18px 0; white-space: nowrap;
+  position: relative;
+}
+.marquee .train { display: inline-flex; animation: train 38s linear infinite; }
+.marquee span {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: clamp(16px, 2vw, 24px); letter-spacing: 0.3em;
+  color: transparent; -webkit-text-stroke: 1px var(--gold-dim);
+  padding-right: 0.6em;
+}
+.marquee span b { font-weight: 600; -webkit-text-stroke: 0; color: var(--gold); padding: 0 0.6em; }
+@keyframes train { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee .train { animation: none; } }
+
+/* ============================================================
+   CAPVT I — CORONAE (titles timeline)
+   ============================================================ */
+#coronae .rows { display: grid; border-top: 1px solid var(--line-soft); }
+.crown-row {
+  display: grid; grid-template-columns: minmax(150px, 0.3fr) 1fr minmax(120px, 0.2fr);
+  align-items: center; gap: clamp(18px, 4vw, 70px);
+  padding: clamp(34px, 6vh, 64px) clamp(14px, 2vw, 30px);
+  border-bottom: 1px solid var(--line-soft);
+  position: relative; transition: background-color .5s;
+}
+.crown-row > .numeral, .crown-row > .crown-body, .crown-row > .crown-where {
+  position: relative; z-index: 1;
+}
+/* the whole row rectangle is the drop space; once filled, the image
+   fades into the page background as it reaches the text */
+.crown-pic {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
+  display: block;
+}
+.crown-pic[data-filled] {
+  -webkit-mask-image: linear-gradient(to right, black 0%, black 26%, transparent 82%);
+  mask-image: linear-gradient(to right, black 0%, black 26%, transparent 82%);
+}
+.crown-row:hover { background: color-mix(in srgb, var(--gold) 4%, transparent); }
+.crown-row .numeral {
+  font-family: var(--f-display); font-weight: 900;
+  font-size: clamp(84px, 11vw, 170px); line-height: 0.9;
+  color: transparent; -webkit-text-stroke: 1.2px var(--gold-dim);
+  transition: color .6s, -webkit-text-stroke-color .6s;
+  text-align: center;
+}
+.crown-row:hover .numeral { color: color-mix(in srgb, var(--gold) 26%, transparent); -webkit-text-stroke-color: var(--gold); }
+.crown-row .crown-body h3 {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 36px); letter-spacing: 0.14em;
+  margin-bottom: 10px;
+}
+.crown-row .crown-body h3 small {
+  display: block; font-family: var(--f-mono); font-weight: 400;
+  font-size: 10px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 10px;
+}
+.crown-row .crown-body p { color: var(--ivory-70); max-width: 56ch; font-size: clamp(16px, 1.5vw, 19px); }
+.crown-row .crown-where {
+  font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.22em; line-height: 2.1;
+  color: var(--ivory-45); text-align: right; text-transform: uppercase;
+}
+.crown-row .crown-where b { color: var(--gold); font-weight: 500; display: block; }
+@media (max-width: 860px) {
+  .crown-row { grid-template-columns: 1fr; gap: 16px; }
+  .crown-row .crown-where { text-align: left; }
+  .crown-row .numeral { text-align: left; }
+  .crown-pic[data-filled] {
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 22%, transparent 80%);
+    mask-image: linear-gradient(to bottom, black 0%, black 22%, transparent 80%);
+  }
+}
+
+/* ============================================================
+   CAPVT II — DOMVS (teams)
+   ============================================================ */
+#domus .houses { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 44px); }
+@media (max-width: 920px) { #domus .houses { grid-template-columns: 1fr; } }
+.house {
+  border: 1px solid var(--line); padding: clamp(28px, 4vw, 52px);
+  position: relative; background: linear-gradient(180deg, var(--bg2), transparent 60%);
+  transition: border-color .5s, transform .6s cubic-bezier(.22,1,.36,1);
+}
+.house:hover { border-color: var(--gold-dim); transform: translateY(-6px); }
+.house::before, .house::after {
+  content: "✦"; position: absolute; color: var(--gold-dim); font-size: 11px;
+  top: 10px;
+}
+.house::before { left: 12px; }
+.house::after { right: 12px; }
+.house .house-media {
+  width: 100%; aspect-ratio: 16 / 10; margin-bottom: 26px;
+  border: 1px solid var(--line-soft); padding: 6px;
+  transition: border-color .5s;
+}
+.house:hover .house-media { border-color: var(--gold-dim); }
+.house .house-media image-slot { display: block; width: 100%; height: 100%; }
+.house .house-era {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.4em;
+  color: var(--gold); margin-bottom: 18px;
+}
+.house h3 {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(24px, 2.7vw, 38px); letter-spacing: 0.1em; line-height: 1.15;
+  margin-bottom: 8px;
+}
+.house .house-motto { font-style: italic; color: var(--ivory-45); margin-bottom: 24px; }
+.house p { color: var(--ivory-70); font-size: clamp(16px, 1.5vw, 19px); margin-bottom: 26px; }
+.house .house-facts { display: grid; gap: 0; border-top: 1px solid var(--line-soft); }
+.house .house-facts div {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 18px;
+  padding: 12px 0; border-bottom: 1px solid var(--line-soft);
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.18em;
+  color: var(--ivory-45); text-transform: uppercase;
+}
+.house .house-facts b { color: var(--ivory); font-weight: 500; text-align: right; }
+
+/* ============================================================
+   CAPVT III — MACHINAE (cars)
+   ============================================================ */
+#machinae .fleet { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(20px, 3vw, 44px); }
+@media (max-width: 860px) { #machinae .fleet { grid-template-columns: 1fr; } }
+.plinth {
+  border: 1px solid var(--line); background: var(--bg2);
+  transition: border-color .5s, transform .6s cubic-bezier(.22,1,.36,1), box-shadow .6s;
+}
+.plinth:hover {
+  border-color: var(--gold-dim); transform: translateY(-8px);
+  box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.8);
+}
+.plinth .plinth-media { position: relative; border-bottom: 1px solid var(--line-soft); }
+.plinth .plinth-media image-slot { width: 100%; height: auto; aspect-ratio: 16 / 10; display: block; }
+.plinth .plinth-year {
+  position: absolute; top: 14px; right: 16px; z-index: 2;
+  font-family: var(--f-display); font-weight: 700; font-size: 14px; letter-spacing: 0.3em;
+  color: var(--gold); background: color-mix(in srgb, var(--bg) 78%, transparent);
+  padding: 6px 10px 6px 13px; border: 1px solid var(--line);
+  backdrop-filter: blur(4px); pointer-events: none;
+}
+.plinth .plinth-body { padding: clamp(22px, 3vw, 36px); }
+.plinth h3 {
+  font-family: var(--f-display); font-weight: 700; font-size: clamp(26px, 3vw, 40px);
+  letter-spacing: 0.12em;
+}
+.plinth .plinth-epithet { font-style: italic; color: var(--ivory-45); margin: 6px 0 20px; }
+.plinth .plinth-stats {
+  display: flex; gap: 0; border-top: 1px solid var(--line-soft);
+}
+.plinth .plinth-stats div {
+  flex: 1; padding: 14px 6px 2px; text-align: center;
+}
+.plinth .plinth-stats div + div { border-left: 1px solid var(--line-soft); }
+.plinth .plinth-stats b {
+  display: block; font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(20px, 2.2vw, 30px); color: var(--gold);
+}
+.plinth .plinth-stats span {
+  font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.26em;
+  color: var(--ivory-45); text-transform: uppercase;
+}
+
+/* ============================================================
+   CAPVT IV — RES GESTAE (records wall)
+   ============================================================ */
+#res .wall {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line);
+}
+@media (max-width: 860px) { #res .wall { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { #res .wall { grid-template-columns: 1fr; } }
+.cell {
+  padding: clamp(30px, 4vw, 56px) clamp(20px, 3vw, 40px);
+  text-align: center; position: relative;
+  border: 0 solid var(--line-soft);
+  border-right-width: 1px; border-bottom-width: 1px;
+  transition: background-color .5s;
+}
+.cell:hover { background: color-mix(in srgb, var(--gold) 5%, transparent); }
+.cell .big {
+  font-family: var(--f-display); font-weight: 800;
+  font-size: clamp(52px, 6.4vw, 96px); line-height: 1; color: var(--ivory);
+  font-variant-numeric: tabular-nums;
+}
+.cell .big em { font-style: normal; color: var(--gold); }
+.cell .lbl {
+  margin-top: 14px; font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: 0.34em; text-indent: 0.34em; color: var(--gold);
+  text-transform: uppercase;
+}
+.cell .sublbl { margin-top: 6px; font-style: italic; font-size: 15px; color: var(--ivory-45); }
+.wall-note {
+  margin-top: 18px; text-align: center;
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.24em;
+  color: var(--ivory-45);
+}
+
+/* ---- motto interlude ------------------------------------------- */
+#motto {
+  padding: clamp(110px, 18vh, 200px) var(--pad); text-align: center;
+  background:
+    radial-gradient(60% 80% at 50% 50%, color-mix(in srgb, var(--gold) 5%, transparent), transparent 70%);
+}
+#motto .motto-latin {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(34px, 5.6vw, 76px); letter-spacing: 0.18em; text-indent: 0.18em;
+  line-height: 1.2;
+  background: linear-gradient(180deg, var(--ivory), color-mix(in srgb, var(--gold) 70%, var(--ivory)));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+#motto .motto-en { margin-top: 18px; font-style: italic; font-size: clamp(17px, 1.8vw, 23px); color: var(--ivory-45); }
+
+/* ============================================================
+   CAPVT V — GALERIA
+   ============================================================ */
+#galeria { background: linear-gradient(180deg, transparent, var(--bg2) 18% 82%, transparent); }
+#galeria .salon {
+  display: grid; gap: clamp(26px, 4vw, 56px);
+  grid-template-columns: repeat(6, 1fr);
+}
+.exhibit { display: grid; gap: 14px; align-content: start; }
+.exhibit.x-lg { grid-column: span 3; }
+.exhibit.x-md { grid-column: span 2; }
+.exhibit.x-sm { grid-column: span 2; }
+@media (max-width: 920px) {
+  .exhibit.x-lg, .exhibit.x-md, .exhibit.x-sm { grid-column: span 3; }
+}
+@media (max-width: 600px) {
+  .exhibit.x-lg, .exhibit.x-md, .exhibit.x-sm { grid-column: span 6; }
+}
+.gilt {
+  padding: clamp(10px, 1.2vw, 16px);
+  border: 1px solid var(--gold-dim);
+  outline: 1px solid var(--line-soft); outline-offset: 5px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--gold) 9%, var(--bg3)), var(--bg2));
+  box-shadow: 0 26px 50px -26px rgb(0 0 0 / 0.85), inset 0 0 0 1px rgb(0 0 0 / 0.4);
+  transition: transform .6s cubic-bezier(.22,1,.36,1), box-shadow .6s;
+}
+.exhibit:hover .gilt { transform: translateY(-7px); box-shadow: 0 40px 70px -28px rgb(0 0 0 / 0.9); }
+.gilt image-slot { width: 100%; display: block; }
+.exhibit .plate {
+  justify-self: center; text-align: center;
+  border: 1px solid var(--line); padding: 8px 18px;
+  background: var(--bg3);
+}
+.exhibit .plate b {
+  display: block; font-family: var(--f-display); font-weight: 600;
+  font-size: 12.5px; letter-spacing: 0.22em; color: var(--gold-80);
+}
+.exhibit .plate span {
+  font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.3em; color: var(--ivory-45);
+}
+
+/* ============================================================
+   CAPVT VI — PROXIMVM (next GP + countdown)
+   ============================================================ */
+#proximum .duo {
+  display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(30px, 5vw, 80px);
+  align-items: center;
+}
+@media (max-width: 980px) { #proximum .duo { grid-template-columns: 1fr; } }
+
+#trackbox { position: relative; }
+#tracksvg { width: 100%; height: auto; display: block; }
+#tracksvg .tarmac { fill: none; stroke: color-mix(in srgb, var(--ivory) 9%, transparent); stroke-width: 16; stroke-linejoin: round; stroke-linecap: round; }
+#tracksvg .raceline { fill: none; stroke: var(--gold); stroke-width: 2; stroke-linejoin: round; }
+#tracksvg .startline { stroke: var(--ivory-70); stroke-width: 2; }
+#tracksvg .corner-dot { fill: var(--bg); stroke: var(--gold); stroke-width: 1.5; transition: r .2s; }
+#tracksvg .corner-hit { fill: transparent; }
+#tracksvg .lapdot { fill: var(--ivory); }
+#tracksvg .lapdot-halo { fill: none; stroke: var(--gold); stroke-width: 1; opacity: 0.7; }
+
+#tracktip {
+  position: absolute; z-index: 5; pointer-events: none;
+  background: var(--bg3); border: 1px solid var(--gold-dim);
+  padding: 7px 12px; transform: translate(-50%, -130%);
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.24em;
+  color: var(--gold-80); white-space: nowrap;
+  opacity: 0; transition: opacity .2s;
+}
+#tracktip.show { opacity: 1; }
+#trackbox .track-cap {
+  margin-top: 6px; text-align: center;
+  font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 0.3em; color: var(--ivory-45);
+}
+
+.gp-plaque { display: grid; gap: 26px; }
+.gp-plaque .gp-round {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.42em; color: var(--gold);
+}
+.gp-plaque h3 {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(28px, 3.4vw, 48px); letter-spacing: 0.08em; line-height: 1.15;
+}
+.gp-plaque .gp-date {
+  font-family: var(--f-serif); font-style: italic; font-size: clamp(17px, 1.7vw, 22px);
+  color: var(--ivory-70);
+}
+.gp-plaque .gp-facts {
+  display: flex; flex-wrap: wrap; gap: 10px 26px;
+  font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.2em; color: var(--ivory-45);
+  text-transform: uppercase;
+}
+.gp-plaque .gp-facts b { color: var(--ivory); font-weight: 500; }
+.gp-plaque .gp-note { color: var(--ivory-70); font-size: clamp(16px, 1.5vw, 19px); max-width: 52ch; }
+.gp-plaque .gp-note em { color: var(--gold-80); font-style: italic; }
+
+#countdown {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  border: 1px solid var(--line); background: var(--line-soft);
+}
+#countdown .unit { background: var(--bg2); padding: 20px 8px 16px; text-align: center; }
+#countdown .unit b {
+  display: block; font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(34px, 4vw, 58px); line-height: 1; color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+#countdown .unit span {
+  display: block; margin-top: 10px;
+  font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.3em; text-indent: 0.3em;
+  color: var(--ivory-45);
+}
+
+/* ============================================================
+   EPILOGVS
+   ============================================================ */
+#epilog {
+  padding: clamp(120px, 20vh, 240px) var(--pad) 60px; text-align: center;
+  display: grid; justify-items: center; gap: clamp(40px, 7vh, 70px);
+}
+#epilog .medallion {
+  width: clamp(140px, 15vw, 180px); aspect-ratio: 1;
+  border-radius: 50%; border: 1px solid var(--gold-dim);
+  outline: 1px solid var(--line-soft); outline-offset: 7px;
+  padding: 8px;
+}
+#epilog .medallion image-slot { display: block; width: 100%; height: 100%; }
+#epilog blockquote {
+  max-width: 22ch;
+  font-family: var(--f-serif); font-style: italic; font-weight: 500;
+  font-size: clamp(26px, 4vw, 52px); line-height: 1.3; color: var(--ivory);
+}
+#epilog blockquote em { color: var(--gold); font-style: italic; }
+#epilog figcaption {
+  margin-top: 26px; font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: 0.34em; color: var(--ivory-45);
+}
+#epilog .mono-mark {
+  font-family: var(--f-display); font-weight: 900; font-size: clamp(60px, 8vw, 110px);
+  line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--gold-dim);
+}
+#epilog footer {
+  width: 100%; border-top: 1px solid var(--line-soft); padding-top: 26px;
+  display: flex; flex-wrap: wrap; gap: 12px 30px; justify-content: space-between;
+  font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 0.24em; color: var(--ivory-45);
+}
