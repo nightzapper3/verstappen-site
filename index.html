@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VERSTAPPEN — MONVMENTVM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Spline+Sans+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="verstappen.css" />
+</head>
+<body>
+
+<!-- fixed chrome (outside the transformed page) -->
+<div id="grain"></div>
+<div id="vignette"></div>
+<div class="flutes left"></div>
+<div class="flutes right"></div>
+
+<div id="cursor"><span class="dot"></span><span class="cursor-tag"></span></div>
+
+<header id="topbar">
+  <a class="wordmark" href="#hero">M<em>·</em>V</a>
+  <nav>
+    <a href="#coronae">CORONAE</a>
+    <a href="#domus">DOMVS</a>
+    <a href="#machinae">MACHINAE</a>
+    <a href="#res">RES GESTAE</a>
+    <a href="#galeria">GALERIA</a>
+    <a href="#proximum">PROXIMVM</a>
+  </nav>
+</header>
+
+<div id="placard">MONVMENTVM</div>
+
+<div id="preloader">
+  <div class="pre-inner">
+    <div class="pre-mono">M · V</div>
+    <div class="lights">
+      <div class="lamp"></div>
+      <div class="lamp"></div>
+      <div class="lamp"></div>
+      <div class="lamp"></div>
+      <div class="lamp"></div>
+    </div>
+    <div class="pre-cap"></div>
+  </div>
+</div>
+
+<!-- =================== PAGE =================== -->
+<main id="page">
+
+  <!-- HERO -->
+  <section id="hero" data-screen-label="Hero" data-placard="MONVMENTVM">
+    <div class="ghost-numeral" data-prx="0.08" aria-hidden="true">IV</div>
+
+    <p class="hero-kicker rv">FORMVLA I &nbsp;·&nbsp; A MONVMENT TO</p>
+    <h1>
+      <span class="h1-small rv" style="--d:.15s">MAX EMILIAN</span>
+      <span class="h1-big" data-split="">VERSTAPPEN</span>
+    </h1>
+    <div class="hero-rule rv-rule"></div>
+    <p class="hero-sub rv" style="--d:.5s">QVADRVPLEX CAMPIO MVNDI</p>
+    <p class="hero-sub2 rv" style="--d:.65s">Four consecutive World Championships &nbsp;·&nbsp; MMXXI — MMXXIV</p>
+
+    <div id="seal" aria-hidden="true">
+      <svg viewBox="0 0 180 180">
+        <defs>
+          <path id="sealpath" d="M 90,90 m -70,0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"></path>
+        </defs>
+        <text><textPath href="#sealpath">MAX VERSTAPPEN ✦ QVATTVOR CORONAE ✦ MMXXI—MMXXIV ✦</textPath></text>
+      </svg>
+      <span class="seal-core">1</span>
+    </div>
+
+    <div id="scrollcue" aria-hidden="true">
+      <span>DESCENDE</span>
+      <span class="stem"></span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="train"><span>SVPER MAX<b>✦</b>NVMERVS I<b>✦</b>QVATTVOR CORONAE<b>✦</b>NATVS AD CVRRENDVM<b>✦</b></span></div>
+  </div>
+
+  <!-- CAPVT I — CORONAE -->
+  <section id="coronae" class="cap" data-screen-label="The Crowns" data-placard="CAPVT I — CORONAE">
+    <div class="measure">
+      <header class="chapter">
+        <span class="kicker rv">CAPVT I</span>
+        <h2 class="rv" style="--d:.1s" data-wave="">CORONAE</h2>
+        <span class="chapter-sub rv" style="--d:.2s">The four crowns, won in succession</span>
+        <span class="fleuron rv" style="--d:.3s">❦</span>
+      </header>
+
+      <div class="rows">
+        <article class="crown-row rv">
+          <image-slot class="crown-pic" shape="rect" id="crown-i" placeholder="Drop: Abu Dhabi 2021" src="crown-i.webp"></image-slot>
+          <div class="numeral" aria-hidden="true">I</div>
+          <div class="crown-body">
+            <h3 data-wave=""><small>MMXXI · THE FIRST CROWN</small>THE LAST LAP OF THE LAST RACE</h3>
+            <p>A season fought wheel-to-wheel to the very end, decided on the final lap of the final Grand Prix. At twenty-four, he became the first Dutch World Champion in the history of the sport.</p>
+          </div>
+          <div class="crown-where"><b>YAS MARINA</b>ABU DHABI<br />12 · XII · MMXXI</div>
+        </article>
+
+        <article class="crown-row rv">
+          <image-slot class="crown-pic" shape="rect" id="crown-ii" placeholder="Drop: Suzuka 2022" src="crown-ii.webp"></image-slot>
+          <div class="numeral" aria-hidden="true">II</div>
+          <div class="crown-body">
+            <h3 data-wave=""><small>MMXXII · THE SECOND CROWN</small>SEALED WITH FOUR ROUNDS TO SPARE</h3>
+            <p>Fifteen victories in a single season — more than any driver before him had ever taken — and a championship confirmed in the rain at Suzuka, the cathedral of the sport.</p>
+          </div>
+          <div class="crown-where"><b>SUZUKA</b>JAPAN<br />9 · X · MMXXII</div>
+        </article>
+
+        <article class="crown-row rv">
+          <image-slot class="crown-pic" shape="rect" id="crown-iii" placeholder="Drop: Qatar 2023"></image-slot>
+          <div class="numeral" aria-hidden="true">III</div>
+          <div class="crown-body">
+            <h3 data-wave=""><small>MMXXIII · THE THIRD CROWN</small>THE MOST DOMINANT SEASON EVER RACED</h3>
+            <p>Nineteen wins from twenty-two Grands Prix, ten of them in a row. No driver, in seventy-five years of the World Championship, has ever owned a season so completely.</p>
+          </div>
+          <div class="crown-where"><b>LUSAIL</b>QATAR<br />7 · X · MMXXIII</div>
+        </article>
+
+        <article class="crown-row rv">
+          <image-slot class="crown-pic" shape="rect" id="crown-iv" placeholder="Drop: Las Vegas 2024" src="crown-iv.gif"></image-slot>
+          <div class="numeral" aria-hidden="true">IV</div>
+          <div class="crown-body">
+            <h3 data-wave=""><small>MMXXIV · THE FOURTH CROWN</small>FOUR IN SUCCESSION, AMONG THE IMMORTALS</h3>
+            <p>Defended against the odds in a car no longer the fastest. With it he joined Fangio, Schumacher and Vettel — the only men ever to win four consecutive world titles.</p>
+          </div>
+          <div class="crown-where"><b>LAS VEGAS</b>NEVADA<br />23 · XI · MMXXIV</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPVT II — DOMVS -->
+  <section id="domus" class="cap" data-screen-label="The Houses" data-placard="CAPVT II — DOMVS">
+    <div class="measure">
+      <header class="chapter">
+        <span class="kicker rv">CAPVT II</span>
+        <h2 class="rv" style="--d:.1s" data-wave="">DOMVS</h2>
+        <span class="chapter-sub rv" style="--d:.2s">The two houses he has served</span>
+        <span class="fleuron rv" style="--d:.3s">❦</span>
+      </header>
+
+      <div class="houses">
+        <article class="house rv">
+          <div class="house-media"><image-slot shape="rect" id="house-toro" placeholder="Drop: the Toro Rosso years" src="house-toro.webp"></image-slot></div>
+          <p class="house-era">MMXV — MMXVI</p>
+          <h3 data-wave="">SCVDERIA<br />TORO ROSSO</h3>
+          <p class="house-motto">The apprenticeship</p>
+          <p>At seventeen years and one hundred sixty-six days, the youngest driver ever to start a Grand Prix. Two races later he was scoring points. The sport changed its rules so that no one could ever arrive so young again.</p>
+          <div class="house-facts">
+            <div><span>FIRST GRAND PRIX</span><b>MELBOURNE · MMXV</b></div>
+            <div><span>AGE AT DEBUT</span><b>17 YEARS, 166 DAYS</b></div>
+            <div><span>FIRST POINTS</span><b>SEPANG · MMXV</b></div>
+            <div><span>GRANDS PRIX</span><b>XXIII</b></div>
+          </div>
+        </article>
+
+        <article class="house rv" style="--d:.15s">
+          <div class="house-media"><image-slot shape="rect" id="house-rbr" placeholder="Drop: the Red Bull dynasty" src="house-rbr.gif"></image-slot></div>
+          <p class="house-era">MMXVI — PRAESENS</p>
+          <h3 data-wave="">RED BVLL<br />RACING</h3>
+          <p class="house-motto">The dynasty</p>
+          <p>Promoted four races into the MMXVI season — and victorious that very Sunday in Barcelona, at eighteen years and two hundred twenty-eight days: the youngest winner in Grand Prix history. Every crown has been won under this banner.</p>
+          <div class="house-facts">
+            <div><span>FIRST VICTORY</span><b>BARCELONA · MMXVI</b></div>
+            <div><span>AGE AT FIRST WIN</span><b>18 YEARS, 228 DAYS</b></div>
+            <div><span>WORLD TITLES</span><b>IV</b></div>
+            <div><span>VICTORIES</span><b>LXIII ✦</b></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPVT III — MACHINAE -->
+  <section id="machinae" class="cap" data-screen-label="The Machines" data-placard="CAPVT III — MACHINAE">
+    <div class="measure">
+      <header class="chapter">
+        <span class="kicker rv">CAPVT III</span>
+        <h2 class="rv" style="--d:.1s" data-wave="">MACHINAE</h2>
+        <span class="chapter-sub rv" style="--d:.2s">The four chariots that carried the crowns</span>
+        <span class="fleuron rv" style="--d:.3s">❦</span>
+      </header>
+
+      <div class="fleet">
+        <article class="plinth rv">
+          <div class="plinth-media">
+            <span class="plinth-year">MMXXI</span>
+            <image-slot shape="rect" id="car-rb16b" placeholder="Drop the RB16B" src="car-rb16b.webp"></image-slot>
+          </div>
+          <div class="plinth-body">
+            <h3 data-wave="">RB16B</h3>
+            <p class="plinth-epithet">The street fighter — the car of the duel.</p>
+            <div class="plinth-stats">
+              <div><b>10</b><span>VICTORIAE</span></div>
+              <div><b>10</b><span>POLES</span></div>
+              <div><b>18</b><span>PODIA</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="plinth rv" style="--d:.1s">
+          <div class="plinth-media">
+            <span class="plinth-year">MMXXII</span>
+            <image-slot shape="rect" id="car-rb18" placeholder="Drop the RB18" src="car-rb18.webp"></image-slot>
+          </div>
+          <div class="plinth-body">
+            <h3 data-wave="">RB18</h3>
+            <p class="plinth-epithet">The juggernaut — fifteen wins in a single year.</p>
+            <div class="plinth-stats">
+              <div><b>15</b><span>VICTORIAE</span></div>
+              <div><b>7</b><span>POLES</span></div>
+              <div><b>17</b><span>PODIA</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="plinth rv">
+          <div class="plinth-media">
+            <span class="plinth-year">MMXXIII</span>
+            <image-slot shape="rect" id="car-rb19" placeholder="Drop the RB19"></image-slot>
+          </div>
+          <div class="plinth-body">
+            <h3 data-wave="">RB19</h3>
+            <p class="plinth-epithet">The untouchable — perhaps the greatest car ever built.</p>
+            <div class="plinth-stats">
+              <div><b>19</b><span>VICTORIAE</span></div>
+              <div><b>12</b><span>POLES</span></div>
+              <div><b>21</b><span>PODIA</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="plinth rv" style="--d:.1s">
+          <div class="plinth-media">
+            <span class="plinth-year">MMXXIV</span>
+            <image-slot shape="rect" id="car-rb20" placeholder="Drop the RB20" src="car-rb20.webp"></image-slot>
+          </div>
+          <div class="plinth-body">
+            <h3 data-wave="">RB20</h3>
+            <p class="plinth-epithet">The defender — a crown held by the driver, not the machine.</p>
+            <div class="plinth-stats">
+              <div><b>9</b><span>VICTORIAE</span></div>
+              <div><b>8</b><span>POLES</span></div>
+              <div><b>14</b><span>PODIA</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPVT IV — RES GESTAE -->
+  <section id="res" class="cap" data-screen-label="Records Wall" data-placard="CAPVT IV — RES GESTAE">
+    <div class="measure">
+      <header class="chapter">
+        <span class="kicker rv">CAPVT IV</span>
+        <h2 class="rv" style="--d:.1s" data-wave="">RES GESTAE</h2>
+        <span class="chapter-sub rv" style="--d:.2s">Deeds done — carved in stone</span>
+        <span class="fleuron rv" style="--d:.3s">❦</span>
+      </header>
+
+      <div class="wall">
+        <div class="cell rv">
+          <div class="big"><em>IV</em></div>
+          <div class="lbl">CORONAE</div>
+          <div class="sublbl">World Championships, consecutive</div>
+        </div>
+        <div class="cell rv" style="--d:.08s" data-count="63">
+          <div class="big" data-num="">0</div>
+          <div class="lbl">VICTORIAE</div>
+          <div class="sublbl">Grand Prix victories</div>
+        </div>
+        <div class="cell rv" style="--d:.16s" data-count="40">
+          <div class="big" data-num="">0</div>
+          <div class="lbl">PRIMAE</div>
+          <div class="sublbl">Pole positions</div>
+        </div>
+        <div class="cell rv" data-count="112">
+          <div class="big" data-num="">0</div>
+          <div class="lbl">PODIA</div>
+          <div class="sublbl">Podium finishes</div>
+        </div>
+        <div class="cell rv" style="--d:.08s" data-count="19">
+          <div class="big" data-num="">0</div>
+          <div class="lbl">VNO ANNO</div>
+          <div class="sublbl">Wins in one season — an all-time record</div>
+        </div>
+        <div class="cell rv" style="--d:.16s">
+          <div class="big"><em>XVIII</em></div>
+          <div class="lbl">IVVENISSIMVS</div>
+          <div class="sublbl">Youngest winner ever — 18 years, 228 days</div>
+        </div>
+      </div>
+      <p class="wall-note rv">✦ FIGURES THROUGH SEASON MMXXIV ✦</p>
+    </div>
+  </section>
+
+  <!-- MOTTO INTERLUDE -->
+  <section id="motto" data-screen-label="Motto" data-placard="INTERLVDIVM">
+    <p class="motto-latin rv" data-wave="">NATVS AD<br />CVRRENDVM</p>
+    <p class="motto-en rv" style="--d:.2s">— born to race —</p>
+  </section>
+
+  <!-- CAPVT V — GALERIA -->
+  <section id="galeria" class="cap" data-screen-label="Gallery" data-placard="CAPVT V — GALERIA">
+    <div class="measure">
+      <header class="chapter">
+        <span class="kicker rv">CAPVT V</span>
+        <h2 class="rv" style="--d:.1s" data-wave="">GALERIA</h2>
+        <span class="chapter-sub rv" style="--d:.2s">A salon of moments — hang your own canvases</span>
+        <span class="fleuron rv" style="--d:.3s">❦</span>
+      </header>
+
+      <div class="salon">
+        <figure class="exhibit x-lg rv">
+          <div class="gilt"><image-slot shape="rect" id="g-prima" style="height:380px" placeholder="Drop: the first victory, Barcelona 2016" src="g-prima.webp"></image-slot></div>
+          <figcaption class="plate"><b>PRIMA VICTORIA</b><span>BARCELONA · MMXVI</span></figcaption>
+        </figure>
+        <figure class="exhibit x-lg rv" style="--d:.1s">
+          <div class="gilt"><image-slot shape="rect" id="g-corona1" style="height:380px" placeholder="Drop: the first crown, Abu Dhabi 2021" src="g-corona1.webp"></image-slot></div>
+          <figcaption class="plate"><b>CORONA PRIMA</b><span>ABU DHABI · MMXXI</span></figcaption>
+        </figure>
+
+        <figure class="exhibit x-md rv">
+          <div class="gilt"><image-slot shape="rect" id="g-zandvoort" style="height:300px" placeholder="Drop: the Orange Army, Zandvoort" src="g-zandvoort.webp"></image-slot></div>
+          <figcaption class="plate"><b>MARE AVRANTIVM</b><span>ZANDVOORT</span></figcaption>
+        </figure>
+        <figure class="exhibit x-md rv" style="--d:.08s">
+          <div class="gilt"><image-slot shape="rect" id="g-brazil" style="height:300px" placeholder="Drop: Silverstone"></image-slot></div>
+          <figcaption class="plate"><b>PLVVIA</b><span>SILVERSTONE</span></figcaption>
+        </figure>
+        <figure class="exhibit x-md rv" style="--d:.16s">
+          <div class="gilt"><image-slot shape="rect" id="g-lusail" style="height:300px" placeholder="Drop: the record season, Qatar 2023" src="g-lusail.webp"></image-slot></div>
+          <figcaption class="plate"><b>DOMINATIO</b><span>LUSAIL · MMXXIII</span></figcaption>
+        </figure>
+
+        <figure class="exhibit x-lg rv">
+          <div class="gilt"><image-slot shape="rect" id="g-suzuka" style="height:340px" placeholder="Drop: the second crown, Suzuka 2022" src="g-suzuka.webp"></image-slot></div>
+          <figcaption class="plate"><b>SVB PLVVIA CORONATVS</b><span>SUZUKA · MMXXII</span></figcaption>
+        </figure>
+        <figure class="exhibit x-lg rv" style="--d:.1s">
+          <div class="gilt"><image-slot shape="rect" id="g-vegas" style="height:340px" placeholder="Drop: the fourth crown, Las Vegas 2024" src="g-vegas.webp"></image-slot></div>
+          <figcaption class="plate"><b>CORONA QVARTA</b><span>LAS VEGAS · MMXXIV</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPVT VI — PROXIMVM -->
+  <section id="proximum" class="cap" data-screen-label="Next Grand Prix" data-placard="CAPVT VI — PROXIMVM CERTAMEN">
+    <div class="measure">
+      <header class="chapter">
+        <span class="kicker rv">CAPVT VI</span>
+        <h2 class="rv" style="--d:.1s" data-wave="">PROXIMVM</h2>
+        <span class="chapter-sub rv" style="--d:.2s">The next conquest awaits</span>
+        <span class="fleuron rv" style="--d:.3s">❦</span>
+      </header>
+
+      <div class="duo">
+        <div id="trackbox" class="rv">
+          <svg id="tracksvg" viewBox="0 0 900 600" role="img" aria-label="Circuit de Barcelona-Catalunya layout">
+            <path class="tarmac" d="M 215 472 L 600 472 C 640 472 658 462 668 440 C 678 418 696 410 722 408 C 788 402 826 372 838 318 C 848 272 846 240 830 214 C 814 188 782 180 758 196 C 738 210 736 232 716 244 C 700 254 676 252 662 238 C 648 224 630 218 610 222 C 584 228 576 246 556 252 C 532 258 510 250 500 230 C 490 210 470 200 444 202 C 410 206 396 188 384 178 C 370 168 348 166 334 176 L 204 290 C 178 312 164 332 168 356 C 172 384 192 398 216 392 C 234 388 240 376 254 372 C 272 366 286 374 290 390 C 294 408 284 420 268 426 C 248 434 234 442 226 452 C 218 462 214 466 215 472 Z"></path>
+            <path class="raceline" d="M 215 472 L 600 472 C 640 472 658 462 668 440 C 678 418 696 410 722 408 C 788 402 826 372 838 318 C 848 272 846 240 830 214 C 814 188 782 180 758 196 C 738 210 736 232 716 244 C 700 254 676 252 662 238 C 648 224 630 218 610 222 C 584 228 576 246 556 252 C 532 258 510 250 500 230 C 490 210 470 200 444 202 C 410 206 396 188 384 178 C 370 168 348 166 334 176 L 204 290 C 178 312 164 332 168 356 C 172 384 192 398 216 392 C 234 388 240 376 254 372 C 272 366 286 374 290 390 C 294 408 284 420 268 426 C 248 434 234 442 226 452 C 218 462 214 466 215 472 Z"></path>
+            <line class="startline" x1="252" y1="461" x2="252" y2="483"></line>
+            <text x="252" y="510" text-anchor="middle" style="font-family: 'Spline Sans Mono', monospace; font-size: 10px; letter-spacing: 3px; fill: rgb(255 252 240 / 0.4);">FINIS</text>
+            <circle class="lapdot-halo" cx="215" cy="472" r="9"></circle>
+            <circle class="lapdot" cx="215" cy="472" r="3.5"></circle>
+          </svg>
+          <div id="tracktip"></div>
+          <p class="track-cap">CIRCUIT DE BARCELONA-CATALUNYA · MONTMELÓ, CATALONIA</p>
+        </div>
+
+        <div class="gp-plaque">
+          <p class="gp-round rv">ROUND VII · SEASON MMXXVI</p>
+          <h3 class="rv" style="--d:.1s" data-wave="">GRAND PRIX DE<br />BARCELONA-CATALUNYA</h3>
+          <p class="gp-date rv" style="--d:.18s">Sunday, the XIVth of June, MMXXVI · 15:00 CEST</p>
+
+          <div id="countdown" class="rv" style="--d:.26s">
+            <div class="unit"><b data-u="d">—</b><span>DIES</span></div>
+            <div class="unit"><b data-u="h">—</b><span>HORAE</span></div>
+            <div class="unit"><b data-u="m">—</b><span>MINVTA</span></div>
+            <div class="unit"><b data-u="s">—</b><span>SECVNDA</span></div>
+          </div>
+          <p class="gp-facts rv" style="--d:.32s" id="gp-live-note-wrap"><b>4.657</b> KM &nbsp;·&nbsp; <b>66</b> LAPS &nbsp;·&nbsp; <b>16</b> CORNERS<span id="gp-live-note"></span></p>
+
+          <p class="gp-note rv" style="--d:.38s">Sacred ground. It was here, in MMXVI, that an eighteen-year-old became the youngest Grand Prix winner in history. He has conquered it three times since — <em>MMXXII · MMXXIII · MMXXIV</em>. Trace the circuit; the corners will give up their names.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EPILOGVS -->
+  <section id="epilog" data-screen-label="Epilogue" data-placard="EPILOGVS">
+    <div class="medallion rv"><image-slot id="epi-portrait" shape="circle" placeholder="Drop: a portrait" src="epi-portrait.webp"></image-slot></div>
+    <figure class="rv">
+      <blockquote>“You know what that is? <em>Simply Lovely.</em>”</blockquote>
+      <figcaption>TEAM RADIO · SÃO PAULO · 3.XI.MMXXIV</figcaption>
+    </figure>
+
+    <div class="mono-mark rv" aria-hidden="true">M·V</div>
+
+    <footer class="rv">
+      <span>MONVMENTVM MAXIMI — AN UNOFFICIAL TRIBUTE</span>
+      <span>STATISTICS THROUGH SEASON MMXXIV</span>
+      <span>IN MARBLE &amp; GOLD · MMXXVI</span>
+    </footer>
+  </section>
+
+</main>
+
+<script src="image-slot.js"></script>
+<script src="gif-parts.js"></script>
+<script src="verstappen.js"></script>
+
+</body>
+</html>
